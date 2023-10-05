@@ -1,0 +1,8 @@
+Flask==2.1.0
+gunicorn==20.1.0
+google-auth==2.19.1
+requests==2.31.0
+google-cloud-aiplatform==1.25.0
+langchain==0.0.244
+google-cloud-logging
+Werkzeug==2.2.2 
