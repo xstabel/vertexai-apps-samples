@@ -120,3 +120,4 @@ Meteocris = Tool(
 ### Test the tool --->  print(meteocris('{ "period":"today", "location":"Arequipa" }'))
 
 
+#

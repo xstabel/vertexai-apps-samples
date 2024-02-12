@@ -1,0 +1,41 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+ name: cloud-run-pipeline
+description: application deployment pipeline
+serialPipeline:
+ stages:
+ - targetId: dev-env
+   profiles: [dev]
+ - targetId: pre-env
+   profiles: [pre]
+ - targetId: prod-env
+   profiles: [prod]
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: dev-env
+description: Cloud Run DEV service
+run:
+ location: projects/_PROJECT_ID/locations/europe-west1
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: pre-env
+description: Cloud Run PRE service
+run:
+ location: projects/_PROJECT_ID/locations/europe-southwest1
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: prod-env
+description: Cloud Run PROD service
+requireApproval: true
+run:
+ location: projects/_PROJECT_ID/locations/europe-west4

@@ -26,7 +26,7 @@ limitations under the License.
   <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
     <div class="mdc-top-app-bar__row">
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <span class="mdc-top-app-bar__title">Calling Weather Api as a Tool</span>
+        <span class="mdc-top-app-bar__title">ReACT langchaing agent - Calling Weather Api as a Tool</span>
       </section>
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
         <a href="#code" title="View the code"><i class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-hidden="true">code</i></a>
@@ -106,7 +106,7 @@ limitations under the License.
       lp.open();
       render({data: document.getElementById('editor').value})
       .then((result) => {
-         preview.innerHTML = '<h3><i aria-hidden="true" class="material-icons">REQUEST TO METEO CRIS OK </i>\nINFO:</h3>\n<p>' + result + '</p>';
+         preview.innerHTML = '<h3><i aria-hidden="true" class="material-icons">REQUEST TO METEO API </i>\nINFO:</h3>\n<p>' + result + '</p>';
       })
       .catch((err) => {
         console.log('Render Text: ' + err.message);

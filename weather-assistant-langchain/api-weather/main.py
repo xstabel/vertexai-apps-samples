@@ -1,5 +1,5 @@
 import os
-### The Weather information is currently updated two times every 12h. Reading weather forecast for "today" from GCS
+### The Weather information is currently updated two times every 12h. Reading weather forecast for "today" from BQ
 import pandas as pd
 from flask import Flask
 from flask import request
@@ -9,12 +9,9 @@ app = Flask(__name__)
 @app.route("/meteocris", methods=['GET','POST'])
 def meterocrisapi():
     city_name = request.args.get('cityname')
-    print(f"Meteocris API - {city_name.upper()}!")    
-    return get_city_weather(city_name.upper()) # f"Meteocris - {city_name}!"
-# llamar a la funcion con los parametros de la ciudad. Tiene que haber una funcion que cargue los datos del bucket y que los guarde para consultar en datastore o BQ para leer 
+    print(f"Meteo API - {city_name.upper()}!")    
+    return get_city_weather(city_name.upper()) 
 
-
-### df_weatherinfo = get_file_from_gcs("","weather_14.json","weather_14.json")
 def get_city_weather(city_name):
    # [START query_parameters]
     from google.cloud import bigquery
@@ -31,11 +28,11 @@ def get_city_weather(city_name):
         ]
     )
     df = client.query(sql, job_config=query_config).to_dataframe()
-    print(f"*** 0 $$$$ get_city_weather from API - {city_name}! and df len: {len(df)}") 
+    print(f"*** 0 function get_city_weather from API - {city_name}! and df len: {len(df)}") 
     # [END query_parameters]
     assert len(df) > 0
     json_data = df.to_json(orient='records')
-    print(f"*** 1 $$$$ get_city_weather data - {json_data}!") 
+    print(f"*** 1 function get_city_weather data - {json_data}!") 
     return json_data
 
 if __name__ == "__main__":
