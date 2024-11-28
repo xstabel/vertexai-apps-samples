@@ -1,0 +1,9 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: api-meteo-demo-prod
+spec:
+  template:
+    spec:
+      containers:
+      - image: api-meteo-demo

@@ -1,0 +1,40 @@
+# Build application from dockerfile
+# TO-DO add unit tests https://github.com/GoogleCloudPlatform/cloud-build-samples/blob/main/python-example-flask/cloudbuild.yaml 
+
+steps:
+# Build the container image
+#- name: 'gcr.io/cloud-builders/docker'
+#  args: ['build', '-t', '${_REGION}-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$BUILD_ID', '-f', './api-weather/Dockerfile', './api-weather']
+#### este funciona  args: ['build', '-t', '${_REGION}-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$BUILD_ID', '-f', './api-weather/Dockerfile', './api-weather']
+# Push the container image to Container Registry
+- name: gcr.io/k8s-skaffold/pack
+  entrypoint: pack
+  args:
+  - build
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$BUILD_ID
+  - --builder
+  - gcr.io/buildpacks/builder:latest
+  - --network
+  - cloudbuild
+  env:
+  - 'GOOGLE_PYTHON_VERSION=3.11.0'
+
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '${_REGION}-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$BUILD_ID']
+# Deploy container image to Cloud Run
+##- name: 'gcr.io/cloud-builders/gcloud'
+##  args: ['run', 'deploy', 'myservice', '--image', '${_REGION}-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/${_IMAGE_NAME}:$BUILD_ID', '--region', '${_REGION}', '--platform', 'managed', '--allow-unauthenticated']
+
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+  args: 
+      [
+        "deploy", "releases", "create", "release-$_RELEASE_TIMESTAMP",
+        "--delivery-pipeline", "$_PIPELINE_NAME",
+        "--region", "${_REGION}",
+        "--skaffold-file", "${_SKAFFOLD_FILE}",
+        "--images", "$_IMAGE_NAME=${_REGION}-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$BUILD_ID"
+      ]
+  entrypoint: gcloud
+images:
+- ${_REGION}-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$BUILD_ID

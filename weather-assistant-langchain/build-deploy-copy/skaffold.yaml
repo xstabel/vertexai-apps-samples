@@ -1,0 +1,21 @@
+# Cloud Deploy uses Skaffold to provide the details for what to deploy and how to deploy it properly for your separate targets.
+
+apiVersion: skaffold/v3alpha1
+kind: Config
+metadata: 
+  name: cloud-run-app
+profiles:
+- name: dev
+  manifests:
+    rawYaml:
+    - deploy-dev-temp.yaml
+- name: pre
+  manifests:
+    rawYaml:
+    - deploy-pre-temp.yaml
+- name: prod
+  manifests:
+    rawYaml:
+    - deploy-pro-temp.yaml
+deploy:
+  cloudrun: {}

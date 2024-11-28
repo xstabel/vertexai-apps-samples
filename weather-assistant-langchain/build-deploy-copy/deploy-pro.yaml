@@ -1,0 +1,9 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: _IMAGE_NAME-prod
+spec:
+  template:
+    spec:
+      containers:
+      - image: _IMAGE_NAME

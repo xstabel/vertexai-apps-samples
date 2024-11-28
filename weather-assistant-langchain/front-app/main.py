@@ -33,7 +33,7 @@ from locationtool import Location
 
 app = Flask(__name__)
 llm = VertexAI(
-            model_name='text-bison@001',
+            model_name='gemini-1.5-flash-002',
             max_output_tokens=256,
             temperature=0.1,
             top_p=0.8,

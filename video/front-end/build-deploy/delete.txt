@@ -1,5 +1,5 @@
-PROJECT_ID="yogaproject-1508"
-REGION="europe-west1"
+"PROJECT_ID="${PROJECT_ID}" 
+REGION="us-central1"
 FPS_GCS_URI="gsc_fps_gcs_video_demogenai"
 VIDEO_TRANSCRIPT_ANNOTATIONS_GCS="gsc_video_transcript_annotationsvideo_demogenai"
 SNIPPETS_GCS_URI="gsc_snippets_video_demogenai"

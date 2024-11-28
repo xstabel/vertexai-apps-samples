@@ -13,7 +13,7 @@ main:
     - video_preprocess:
         call: http.post
         args:
-          url: https://video-pre-job-mlb-oyntfgdwsq-uc.a.run.app
+          url: https://video-demogenai-job-dev-gzipihuhoq-ew.a.run.app/
           body:
             data: ${event.data}
         result: video_preprocess_result
