@@ -29,7 +29,7 @@ gcloud services enable \
   clouddeploy.googleapis.com \
   artifactregistry.googleapis.com
 
-gcloud artifacts repositories create containers-repo \
+gcloud artifacts repositories create ${REPO_NAME} \
   --repository-format=docker \
   --location=${REGION} \
   --description="Containers repository"

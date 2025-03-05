@@ -35,5 +35,6 @@ def get_city_weather(city_name):
     print(f"*** 1 function get_city_weather data - {json_data}!") 
     return json_data
 
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

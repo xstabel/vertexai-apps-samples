@@ -39,6 +39,7 @@ COPY . ./
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
 
 ### BUILD: gcloud builds submit --region=us-west2 --tag europe-west1-docker.pkg.dev/yogaproject-1508/demos-docker-repo/front-meteocris:1.0
+## gcloud builds submit --region=${REGION} --default-buckets-behavior=regional-user-owned-bucket --tag ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:1.0
 #### build  las siguientes versiones y las levanto directamente en la consola web
 #### gcloud iam service-accounts create front-meteocris-identity
 #gcloud run services add-iam-policy-binding api-weather --member serviceAccount:front-meteocris-identity@yogaproject-1508.iam.gserviceaccount.com --role roles/run.invoker

@@ -118,6 +118,3 @@ Meteocris = Tool(
     return_direct=False
 )
 ### Test the tool --->  print(meteocris('{ "period":"today", "location":"Arequipa" }'))
-
-
-#

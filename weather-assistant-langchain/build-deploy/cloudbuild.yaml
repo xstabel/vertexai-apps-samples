@@ -17,6 +17,7 @@ steps:
         "deploy", "releases", "create", "release-$_RELEASE_TIMESTAMP",
         "--delivery-pipeline", "cloud-run-pipeline",
         "--region", "${_REGION}",
+        "--default-buckets-behavior=regional-user-owned-bucket",
         "--images", "app=${_REGION}-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/${IMAGE_NAME}:$SHORT_SHA"
       ]
   entrypoint: gcloud
