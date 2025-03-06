@@ -16,12 +16,18 @@ def get_city_weather(city_name):
    # [START query_parameters]
     from google.cloud import bigquery
     client = bigquery.Client()
-    sql = """
-        SELECT  city.name,clouds,main,weather
-        FROM `yogaproject-1508.data_weather.forecasting_history`
+    project_id = os.environ.get("PROJECT_ID")
+    dataset_id = os.environ.get("DATASET_ID")
+    if project_id and dataset_id:
+        sql = f"""
+        SELECT main.temp
+        FROM `{project_id}.{dataset_id}.forecasting_history`
         WHERE UPPER(city.name) = @citytofind
         LIMIT 1
     """
+    else:
+        print("PROJECT_ID or DATASET_ID environment variables are not set. Using default values.")
+        return "Internal error", 500
     query_config = bigquery.QueryJobConfig(
         query_parameters=[
             bigquery.ScalarQueryParameter("citytofind", "STRING", city_name) #,bigquery.ScalarQueryParameter("limit", "INTEGER", 100),
