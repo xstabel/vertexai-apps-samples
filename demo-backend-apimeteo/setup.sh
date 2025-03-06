@@ -20,7 +20,6 @@ export PROJECT_NAME=$(gcloud projects describe $PROJECT_ID --format='value(name)
 export REGION=europe-west1
 export IMAGE_NAME=api-meteo-demo
 export REPO_NAME=demos-docker-repo
-export DBINSTANCE=postgresdemovideoai
 
 gcloud config set project $PROJECT_ID
 
