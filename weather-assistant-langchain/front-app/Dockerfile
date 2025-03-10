@@ -37,9 +37,3 @@ COPY . ./
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
-
-### BUILD: gcloud builds submit --region=us-west2 --tag europe-west1-docker.pkg.dev/yogaproject-1508/demos-docker-repo/front-meteocris:1.0
-#### build  las siguientes versiones y las levanto directamente en la consola web
-#### gcloud iam service-accounts create front-meteocris-identity
-#gcloud run services add-iam-policy-binding api-weather --member serviceAccount:front-meteocris-identity@yogaproject-1508.iam.gserviceaccount.com --role roles/run.invoker
-#gcloud run deploy front-meteocris --image europe-west1-docker.pkg.dev/yogaproject-1508/demos-docker-repo/front-meteocris:1.0 --service-account front-meteocris-identity --set-env-vars API_WEATHER_URL=https://api-weather-gzipihuhoq-ew.a.run.app --allow-unauthenticated

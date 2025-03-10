@@ -20,11 +20,6 @@ export PROJECT_NAME=$(gcloud projects describe $PROJECT_ID --format='value(name)
 export REGION=europe-west1
 export IMAGE_NAME=api-meteo-demo
 export REPO_NAME=demos-docker-repo
-export PASS_DB=P4w0rd@@
-export DBINSTANCE=postgresdemovideoai
-
-echo DATABASE_PASSWORD="'${PASS_DB}'" > ../front-end/utils/credentials.py
-
 
 gcloud config set project $PROJECT_ID
 
@@ -58,15 +53,12 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
     --role=roles/iam.serviceAccountUser
 
-
-cd ..
-
-
+# cd ..
 
 export RELEASE_TIMESTAMP=$(date '+%Y%m%d-%H%M%S')
 
 gcloud builds submit \
-  --config ./build-deploy-copy/cloudbuild.yaml \
+  --config ./cloudbuild.yaml \
   --substitutions=_REGION=${REGION},_RELEASE_TIMESTAMP=${RELEASE_TIMESTAMP},_IMAGE_NAME=${IMAGE_NAME},_REPO_NAME=${REPO_NAME}
 
 gcloud beta deploy releases promote \
