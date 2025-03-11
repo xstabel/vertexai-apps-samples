@@ -11,3 +11,8 @@ spec:
           limits:
             cpu: 1
             memory: 512Mi
+        env:
+        - name: DATASET_ID
+          value: data_weather
+        - name: PROJECT_ID
+          value: yogaproject-1508
